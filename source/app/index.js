@@ -69,7 +69,6 @@ $(function () {
       $("#balance__tka").html("token a : " + token0Balance / 1e18);
     } catch (err) {
       $("#balance__tka").html("token a : " + 0);
-      console.error(err);
     }
     networkService
       .getTokenBalances(EnvConfig.TOKENS[1].address)
@@ -113,9 +112,7 @@ $(function () {
         desttoken.address,
         defaultSrcAmount
       );
-      console.log(rate)
       rate /= 1e18;
-      console.log(rate)
 
       $("#exchange-rate").html(rate);
       exChangeRate = rate;
@@ -253,7 +250,6 @@ $(function () {
       // const destTokenSym = $('#"selected-dest-symbol').text();
       const value = $("#swap-source-amount").val();
       $(".input-placeholder").html(exChangeRate * value);
-      console.log(value, exChangeRate);
     }
   });
 
@@ -298,7 +294,6 @@ $(function () {
   $("#swap-button").on("click", function () {
     // const modalid = $(this).data('modal-id');
     // $(`#${modalid}`).addClass('modal--active');
-
     const srcTokenSym = $("#selected-src-symbol").text();
     const destTokenSym = $("#selected-dest-symbol").text();
     const value = $("#swap-source-amount").val();
@@ -315,6 +310,7 @@ $(function () {
     const srcToken = findTokenBySymbol(srcTokenSym);
     const destToken = findTokenBySymbol(destTokenSym);
     //do transaction
+
     networkService
       .getTokenBalances(srcToken.address)
       .then((res) => {
